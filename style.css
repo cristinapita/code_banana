@@ -1,0 +1,675 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap');
+@import url("https://use.typekit.net/rvc5pbn.css");
+
+/*body*/
+
+h1 {
+    font-size: 3.75rem;
+    font-family: "effra", sans-serif;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-family: "effra", sans-serif;
+    font-weight: 400;
+}
+
+h3{
+    font-size: 2rem;
+    font-family: "effra", sans-serif;
+    font-weight: 700;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #FDFCFC;
+}
+
+/*header*/
+
+.header_title {
+    height: 100vh;
+    background: linear-gradient(180deg, #FECB55 0%, #ECECEC 53%, rgba(236, 236, 236, 0.00) 92%);    display: flex;
+    align-items: center;
+    z-index: 2;
+    /* display: grid;
+    grid-template-columns: 70% 50%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.header_title h1 {
+    align-content: center;
+    width: 50%;
+    
+}
+
+.header_title h2 {
+    align-content: center;
+    width: 50%;
+
+    margin-top: 2%;
+}
+
+.right_content{
+text-align: center;
+display: contents;
+}
+.left_content svg{
+  width: 10%;
+  position: absolute;
+  top: 100px;
+  left: 50%; /* Ajusta el posicionamiento horizontal */
+  transform: translateX(-50%); /* Centra horizontalmente el SVG */
+  transition: top 0.3s ease-out; /* Transición suave del movimiento */
+
+}
+
+#pollution1{
+display: flex;
+justify-content: center;
+}
+
+.svg-original-color {
+    fill: url(#paint0_linear_3660_436); /* Establece el gradiente original */
+}
+
+/*content*/
+
+.content {
+    z-index: 1;
+    position: relative;
+    
+}
+#scrolly_content{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.wrapper_80 {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 10%;
+ 
+}
+
+.wrapper_80 p {
+    margin-top: 5%;
+}
+
+
+  .wrapper_80_pollution{
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 10%;
+  }
+
+  .wrapper_80_pollution::before {
+    content: url('img/emissions.svg');
+    position: absolute;
+    left: 0;
+    transform: translateY(0%);
+  }
+  .wrapper_80_pollution::after {
+    content: url('img/emissions.svg');
+    position: absolute;
+    transform: translateX(350%);
+    align-items: right;
+  }
+  .infographics_2{
+    width: 80%;
+    margin:0 auto;
+    justify-content: center;
+    display: flex;
+    -webkit-animation: fadein 2s ease-in alternate 1;
+    -moz-animation: fadein 2s ease-in alternate 1;
+    animation: fadein 2s ease-in alternate 1;
+  }
+
+  @keyframes fadein {
+    from {
+      opacity:0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+
+.wrapper_90 {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+.wrapper_100{
+    overflow-x: hidden; 
+
+}
+.title_chart{
+    width: 600px;
+    margin: 0 auto;
+}
+div#htmlwidget_container{
+    margin: 0 auto;
+  }
+  
+  .source{
+    color: #7d7d7d;
+  }
+
+
+button {
+    position: absolute;
+    margin: 20px;
+}
+
+#pause::after {
+    content: 'Pause';
+}
+
+#pause.pause::after {
+    content: 'Play';
+}
+
+/*scrolly*/
+
+#features {
+    position: relative;
+    width: 100%;
+    font-family: sans-serif;
+    padding-top: 10px;
+    padding-bottom: 10vh;
+}
+
+section {
+    padding: 25px 50px;
+    line-height: 25px;
+    opacity:0;
+    font-size: 13px;
+    background-color: rgba(68, 75, 85, 0.8);
+    margin-top: 30%;
+    border-radius: 12px;
+}
+
+section p {
+    color: white;
+    font-size: 1.5em;
+}
+
+section h3 {
+    color: white;
+}
+
+section.active {
+    opacity: 1;
+    z-index: 3;
+    position: relative;
+}
+
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 200px;
+}
+
+.map-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#map-container {
+    position: sticky;
+        top: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.mapboxgl-map {
+    height: 100%;
+}
+
+.sticky {
+    position: sticky;
+}
+
+.no-sticky {
+    position: relative;
+    top: auto;
+}
+
+/* pollution */
+#pollution1 {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+
+.treemap{
+    width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+}
+
+/* lateral scroll */
+
+
+.parallax-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative; /* Añadido: para facilitar el posicionamiento sticky */
+    height: 100vh; /* Ajustado: para ocupar la altura completa de la ventana */
+}
+
+.parallax-image {
+    width: 300%; /* Ajustar el ancho para que la imagen sea tres veces más ancha que el contenedor */
+    white-space: nowrap; /* Evitar el salto de línea en la imagen */
+    position: sticky;
+    top: 0; /* Añadido: para que la imagen se quede fija en la parte superior */
+}
+
+.parallax-image img {
+    width: 100%;
+    display: block;
+}
+
+.content {
+    padding: 20px;
+}
+
+#js-wrapper {
+    width: 100%;
+    height: 100vh; /* Ajusta según sea necesario */
+    overflow: hidden;
+  }
+  
+  #js-slideContainer {
+    width: 200%; /* Ajusta el ancho según sea necesario */
+    height: 100%;
+    display: flex;
+  }
+  
+  .slide {
+    flex: 1 0 33.33%; /* Ajusta según el número de slides */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .slide-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .slide h2 {
+    margin-bottom: 10px;
+  }
+
+/* scrolly img */
+
+#scrolly_img {
+    position: relative;
+    display: contents;
+    padding: 1rem
+}
+
+.info_rios_valencia-desk {
+    margin-bottom: 70px
+}
+
+.info_rios_valencia-mob {
+    display: none
+}
+
+article {
+    position: relative;
+    padding: 0;
+    width: 50%;
+    margin-left: 10%;
+    margin: 0 auto;
+    display: block
+}
+
+.sticky-thing {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100%;
+    margin: 0;
+    z-index: 0;
+    top: 1vh;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: 1440px 802px;
+    background-position: center;
+    transition: background-image 0.6s ease-in-out
+}
+
+.ai2html-container {
+    position: absolute;
+    margin: 0 auto;
+    width: 80%;
+    height: auto
+}
+
+.ai2html-container img.hidden {
+    position: absolute;
+    width: 100%;
+    height: auto
+}
+
+.ai2html-container img {
+    position: absolute;
+    width: 100%;
+    height: auto
+}
+
+.hidden {
+    opacity: 0 !important
+}
+
+.sticky-thing p {
+    padding: 1rem;
+    
+}
+
+.step {
+    margin: 0 auto 50rem auto;
+    z-index: 2;
+    padding: 25px 50px;
+}
+
+.step p {
+    text-align: left;
+    padding: 1rem;
+    background-color: rgba(68, 75, 85, 0.8);
+    color: white;
+    border: 1px solid black;
+    border-radius:12px;
+    font-size:1.5em;
+}
+
+.step:last-child {
+    margin-bottom: 0
+}
+
+.is-active p {
+    opacity: 1
+}
+
+#outro {
+    height: 100vh
+}
+
+#main2 {
+    margin-bottom: 60%
+}
+
+#main2 #article p {
+    margin-top: 120%
+}
+
+#scrollama #scrolly_img {
+    position: relative;
+    display: block;
+    background-color: #ffffff
+}
+
+.sticked,
+#pagedoc {
+    overflow: visible !important
+}
+
+.comment-item {
+    overflow: hidden
+}
+
+#scrollama article {
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+    z-index: 1
+}
+
+#scrollama figure {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    width: 100%;
+    margin: 0 auto;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
+}
+
+#scrollama figure .p__step {
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    display: block
+}
+
+ #img1m{
+    display: none;
+ }
+
+ #img2m{
+    display: none;
+ }
+/* responsive */
+    /* responsive iframe */
+
+    .chart_container {
+        position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 56.25%; /* Aspect Ratio (16:9) */
+      overflow: hidden;
+      }
+      
+    .responsive-iframe {
+     position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      }
+
+      .tooltip {
+        background-color: #ffffff;
+        font-family: lato;
+        font-size: 1em;
+        padding: 4px;
+        color: #666666;
+        border: none;
+        box-shadow: 0px 0px 3px 0px #E6E6E6;
+        font-family: "Roboto", sans-serif;
+
+    }
+
+    .chart_treemap{
+        width: 100%;
+        height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .legend{
+        display: flex;
+        align-items: center;
+    }
+    .legend p{
+       margin-left: 10px;
+       margin-right: 10px;
+
+
+
+    }
+
+    footer{
+        background-color: #fbf5f0;
+        display: flex;
+    }
+
+    footer p{
+        opacity: .5;
+        font-family: effra, "sans-serif";
+        display: block;
+        justify-content: center;
+        padding-top: 10%;
+        text-align: center;
+        width: 100%;
+        position: absolute;
+    }
+
+    footer img{
+        display: block;
+        width: 30%;
+        position: relative;
+
+    }
+    
+
+      @media only screen and (max-width: 1200px) {
+      
+        .slide-content img{
+            width: 100%;
+        }
+    
+    }
+
+    @media only screen and (max-width: 900px) {
+    
+    
+    .left_content svg{
+        top: 10px;
+
+    }
+    }
+
+
+@media only screen and (max-width: 700px) {
+
+
+    .wrapper_80 {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 5%;
+    }
+    
+    .wrapper_80 p {
+        margin-top: 5%;
+    }
+
+    .wrapper_80_pollution{
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 5%;
+    }
+    .wrapper_80_pollution::before{
+        content: url('');
+    }
+
+    .wrapper_80_pollution::after{
+        content: url('');
+    }
+    .wrapper_90 {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 10%;
+    }
+
+    #scrolly_content{
+        width: 90%;
+    margin-left: 0%;
+    margin: 0 auto;
+    }
+   
+
+    .title_chart{
+        width: 90%;
+    }
+
+    .left_content svg{
+        top: 0;
+        width: 20%;
+    }
+
+
+    .slide-content img{
+        width:150%;
+    }
+
+    #article{
+        width: 100%;
+    margin-left: 0%;
+    }
+
+    .step{
+        width: 90%;
+        padding: 0px
+    }
+}
+
+
+@media only screen and (max-width: 500px) {
+
+    .header_title h1{
+        font-size: 3rem;
+    }
+
+
+    #img1{
+        display: none;
+     }
+    
+     #img2{
+        display: none;
+     }
+
+    #img1m{
+        display: block;
+        margin-bottom: 20%;
+     }
+    
+     #img2m{
+        display: block;
+     }
+    
+    }
+
+
+@media only screen and (max-width: 400px) {
+
+.header_title h1{
+    font-size: 2rem;
+}
+
+}

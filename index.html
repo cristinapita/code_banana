@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How much a banana pollutes</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://raw.githubusercontent.com/russellsamora/scrollama/main/build/scrollama.min.js"></script>
+    <script src="https://raw.githubusercontent.com/russellsamora/scrollama/main/build/scrollama.js"></script>
+
+    <script src="pollution.js"></script>
+    <!-- Incluye GSAP y ScrollMagic antes de horizontal.js -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script>
+    <script src="horizontal.js"></script>
+    <script src="scrollama.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+
+    <script src="scroll_img.js"></script>
+
+
+
+    <script src="treemap.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/rvc5pbn.css">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <svg width="150" height="auto" viewBox="0 0 76 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M29.6859 24.6899L31.2516 13.6839H27.0481L27.5218 10.3519H39.5584L39.0846 13.6839H34.9217L33.356 24.6899H29.685H29.6859Z"
+                    fill="#C2447A" />
+                <path
+                    d="M47.7519 24.6899L47.0577 23.6584C46.2259 24.2168 45.504 24.5866 44.8902 24.765C44.2772 24.9444 43.6487 25.034 43.0063 25.034C42.1858 25.034 41.4544 24.8658 40.812 24.5285C40.1696 24.1921 39.6846 23.7087 39.3569 23.0777C39.0293 22.4475 38.9316 21.673 39.0621 20.7559C39.1884 19.8679 39.5281 19.0396 40.0815 18.2736C40.6348 17.5068 41.3645 16.8732 42.2697 16.3711C42.0406 15.8699 41.9126 15.4216 41.8867 15.0279C41.8607 14.6343 41.8702 14.279 41.9152 13.9639C42.0215 13.2185 42.3086 12.5456 42.7772 11.9436C43.2458 11.3416 43.8406 10.8617 44.5608 10.5031C45.281 10.1453 46.0798 9.96594 46.9548 9.96594C47.8297 9.96594 48.5612 10.1845 49.2303 10.6217C49.8995 11.0589 50.3569 11.7574 50.6033 12.7181L47.8842 14.244C47.7986 13.8862 47.6594 13.5882 47.4675 13.3517C47.2755 13.1152 47.0015 12.9973 46.6461 12.9973C46.3176 12.9973 46.0262 13.1015 45.7712 13.309C45.5161 13.5173 45.364 13.7932 45.3156 14.1364C45.2827 14.3661 45.3216 14.595 45.4331 14.8247C45.5438 15.0544 45.6545 15.2619 45.7643 15.448L48.1686 19.0165C48.4825 18.7296 48.8197 18.4077 49.1776 18.049C49.5364 17.6913 49.9228 17.3044 50.337 16.8886L52.3039 19.0601C51.8422 19.5186 51.4021 19.9447 50.9837 20.3392C50.5652 20.7329 50.1753 21.0949 49.8139 21.4245L52.0142 24.6916H47.7493L47.7519 24.6899ZM45.4876 21.2939L43.7308 18.6502C43.3539 18.8936 43.0625 19.166 42.8559 19.4665C42.6484 19.768 42.5221 20.083 42.4746 20.4127C42.4097 20.8712 42.5195 21.2264 42.8049 21.4766C43.0902 21.7277 43.4377 21.8532 43.8484 21.8532C44.1078 21.8532 44.3628 21.8139 44.6144 21.7345C44.8643 21.6559 45.1556 21.5091 45.4867 21.2939H45.4876Z"
+                    fill="#FF8754" />
+                <path
+                    d="M53.7192 24.6899L55.7596 10.3519H65.6027L65.135 13.6412H58.9213L58.6057 15.8554H63.7119L63.2718 18.9508H58.1657L57.8172 21.4015H64.4615L63.9937 24.6908H53.72L53.7192 24.6899Z"
+                    fill="#C2447A" />
+                <path
+                    d="M10.7267 24.6549H20.135C20.3036 23.9402 20.4393 23.2127 20.5387 22.4749H12.589C12.0262 23.2494 11.4037 23.9778 10.7267 24.6549Z"
+                    fill="url(#paint0_linear_3456_19419)" />
+                <path
+                    d="M20.7341 18.4342H14.8006C14.5075 19.1874 14.1643 19.9149 13.7761 20.6142H20.716C20.7402 20.189 20.7523 19.7612 20.7523 19.3291C20.7523 19.0294 20.7471 18.7314 20.7341 18.4342Z"
+                    fill="url(#paint1_linear_3456_19419)" />
+                <path
+                    d="M15.4127 16.5744H20.5897C20.5024 15.8366 20.3805 15.1091 20.2249 14.3943H15.8545C15.7533 15.1355 15.6038 15.8631 15.4136 16.5744H15.4127Z"
+                    fill="url(#paint2_linear_3456_19419)" />
+                <path
+                    d="M19.7373 12.5328C19.5082 11.7899 19.2453 11.0624 18.9453 10.3528H10.7336L10.3982 12.5328H19.7373Z"
+                    fill="url(#paint3_linear_3456_19419)" />
+                <defs>
+                    <linearGradient id="paint0_linear_3456_19419" x1="10.7267" y1="23.5653" x2="20.5387" y2="23.5653"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#D6447A" stop-opacity="0.4" />
+                        <stop offset="1" stop-color="#C2447A" />
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_3456_19419" x1="13.7761" y1="19.5238" x2="20.7523" y2="19.5238"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#D6447A" stop-opacity="0.4" />
+                        <stop offset="1" stop-color="#C2447A" />
+                    </linearGradient>
+                    <linearGradient id="paint2_linear_3456_19419" x1="15.4127" y1="15.4839" x2="20.5889" y2="15.4839"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#D6447A" stop-opacity="0.4" />
+                        <stop offset="1" stop-color="#C2447A" />
+                    </linearGradient>
+                    <linearGradient id="paint3_linear_3456_19419" x1="10.3982" y1="11.4432" x2="19.7373" y2="11.4432"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#D6447A" stop-opacity="0.4" />
+                        <stop offset="1" stop-color="#C2447A" />
+                    </linearGradient>
+                </defs>
+
+            </svg>
+
+        </div>
+    </header>
+    <div class="header_title">
+        <div class="right_content">
+            <h1>How much pollution can transporting a banana produce?</h1>
+            <h2>T&E recreates the travel of the fruit from the plantation to the basket to see the emissions emitted by
+                the different transports </h2>
+        </div>
+        <div class="left_content">
+            <svg id="mySvg" width="390" height="232" viewBox="0 0 390 232" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M10.5503 65.1006C20.9503 61.9006 29.8836 66.434 33.0503 69.1006C26.6499 89.1007 8.71682 98.7673 0.550311 101.101C-1.04969 96.7006 1.21698 80.6006 2.55031 73.1006C7.75031 74.3006 10.0503 68.2673 10.5503 65.1006Z"
+                    fill="url(#paint0_linear_3660_436)" />
+                <path
+                    d="M356.214 52.9228C358.214 55.3228 370.714 58.5895 376.714 59.9228C379.913 60.6813 385.714 44.5723 388.215 36.4229L374.715 10.9229L363.5 1.5C358.167 0.666667 347.615 -0.577181 345.215 5.42282C342.215 12.9228 347.714 8.92282 343.714 18.9228C339.714 28.9228 353.714 49.9228 356.214 52.9228Z"
+                    fill="url(#paint1_linear_3660_436)" />
+                <path
+                    d="M121 116C205.4 147.2 282.167 116.667 310 97.5C326.4 94.7 344.5 107 351.5 113.5L355.5 138.5C345.1 177.7 315.167 200.833 301.5 207.5C217.9 251.1 127.333 225.667 92.5 207.5C65.7207 192.398 38.6025 172.725 24.5 157C2.37111 132.325 1.32333 112.808 0 101C19.2 94.2 29.3333 76.8333 32 69C38.4 69 94 100.333 121 116Z"
+                    fill="#F7DC76" />
+                <path
+                    d="M284.5 197C146.9 253.4 40.8333 167.833 5 118C5 139.6 32.3333 166.333 46 177C99.2 224.2 169.5 233 198 231.5C310.8 232.7 350 170.667 355.5 139.5C355.5 129.1 354.333 119.667 352 118.5C348 158.1 304.167 188.833 284.5 197Z"
+                    fill="url(#paint2_linear_3660_436)" />
+                <path
+                    d="M331 51.5H339V55.5C350 59 356.833 55.6667 358 54L354 49.5C349 42.5 344.833 28.8333 344 22C347.6 14.4 346 10.1667 345 10C345 6 348.667 2.66667 350 1.5C344.8 1.9 338.167 4.33333 336.5 5.5V20L325.5 29.5V45L331 51.5Z"
+                    fill="url(#paint3_linear_3660_436)" />
+                <path
+                    d="M321 90.0001L311 96.5001C339 96.5001 351.5 117 351 112C350.6 108 357.167 89 360.5 80C362.9 74.8 374.833 63.8334 380.5 59.0001C375 63.0001 357 51.0001 354.5 55.0001C352.5 58.2001 343 56.3334 338.5 55.0001L334.5 72.5001C332.9 79.3001 324.833 87.0001 321 90.0001Z"
+                    fill="url(#paint4_linear_3660_436)" />
+                <path
+                    d="M17.1215 147.687C-2.07854 118.487 -0.211878 85.8535 3.12145 73.1868C8.72174 73.1868 9.788 68.5201 9.62109 66.1868C11.2211 64.5868 16.1665 63.6667 18 64C19.1605 63.9528 25.0807 65.3058 26.5 65.5C44 72.5 81.5652 91.6493 101.121 104.687C131.921 127.487 190.288 130.187 215.621 128.687C268.821 121.887 307.121 100.853 319.621 91.1868C335.221 84.3868 339.121 62.0201 339.121 51.6868H331.121L326.121 46.1868V41.1868V30.1868L331.121 24.6868L336.621 20.1868V5.68684C341.821 0.886837 357.121 0.686838 364.121 1.18684L375.621 11.6868L388.621 36.6868L379.621 58.5C371.221 63.7 365.121 73 364.121 75C354.521 83.8 353.454 103.187 352.121 112.687C354.121 118.687 355.288 131.52 355.621 137.187C350.821 167.987 324.288 192.687 311.621 201.187C260.421 234.387 191.621 233.02 163.621 228.187C96.0211 221.387 37.788 171.687 17.1215 147.687Z"
+                    stroke="black" />
+                <defs>
+                    <linearGradient id="paint0_linear_3660_436" x1="9.5" y1="64" x2="27" y2="83"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#AEAE55" />
+                        <stop offset="1" stop-color="#F7DC76" />
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_3660_436" x1="381.5" y1="60.4228" x2="350" y2="0.42285"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#F5CD97" />
+                        <stop offset="1" stop-color="#6A3B28" />
+                    </linearGradient>
+                    <linearGradient id="paint2_linear_3660_436" x1="180" y1="162" x2="200" y2="259.5"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#F7DC76" />
+                        <stop offset="1" stop-color="#D59C56" />
+                    </linearGradient>
+                    <linearGradient id="paint3_linear_3660_436" x1="341.25" y1="1.5" x2="341.25" y2="56.7287"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#81543B" />
+                        <stop offset="0.69675" stop-color="#896240" />
+                        <stop offset="0.906779" stop-color="#9C834A" />
+                        <stop offset="0.950347" stop-color="#A79650" />
+                        <stop offset="1" stop-color="#B8B45A" />
+                    </linearGradient>
+                    <linearGradient id="paint4_linear_3660_436" x1="345.75" y1="54.1716" x2="340" y2="107.5"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#AEAE55" />
+                        <stop offset="1" stop-color="#F7DC76" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+        </div>
+
+
+    </div>
+    <div id="pollution1">
+        <svg width="725" height="324" viewBox="0 0 725 324" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_f_3677_1013)">
+                <circle cx="531.5" cy="83.5" r="48.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="531.5" cy="83.5" r="48" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter1_f_3677_1013)">
+                <circle cx="595.5" cy="63.5" r="48.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="595.5" cy="63.5" r="48" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter2_f_3677_1013)">
+                <circle cx="574.5" cy="112.5" r="48.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="574.5" cy="112.5" r="48" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter3_f_3677_1013)">
+                <circle cx="671.5" cy="63.5" r="38.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="671.5" cy="63.5" r="38" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter4_f_3677_1013)">
+                <circle cx="643.5" cy="113.5" r="38.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="643.5" cy="113.5" r="38" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter5_f_3677_1013)">
+                <circle cx="48.5" cy="181.5" r="33.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="48.5" cy="181.5" r="33" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter6_f_3677_1013)">
+                <circle cx="88" cy="191" r="39" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="88" cy="191" r="38.5" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter7_f_3677_1013)">
+                <circle cx="66.5" cy="217.5" r="26.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="66.5" cy="217.5" r="26" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter8_f_3677_1013)">
+                <circle cx="126.5" cy="215.5" r="26.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="126.5" cy="215.5" r="26" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter9_f_3677_1013)">
+                <circle cx="86.5" cy="142.5" r="38.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="86.5" cy="142.5" r="38" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter10_f_3677_1013)">
+                <circle cx="126.5" cy="174.5" r="38.5" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="126.5" cy="174.5" r="38" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter11_f_3677_1013)">
+                <circle cx="346.77" cy="270.21" r="20.77" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="346.77" cy="270.21" r="20.27" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter12_f_3677_1013)">
+                <circle cx="371.26" cy="276.1" r="24.18" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="371.26" cy="276.1" r="23.68" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter13_f_3677_1013)">
+                <circle cx="357.93" cy="292.53" r="16.43" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="357.93" cy="292.53" r="15.93" stroke="#D9D9D9" />
+            </g>
+            <g filter="url(#filter14_f_3677_1013)">
+                <circle cx="395.131" cy="291.29" r="16.43" fill="#D9D9D9" fill-opacity="0.5" />
+                <circle cx="395.131" cy="291.29" r="15.93" stroke="#D9D9D9" />
+            </g>
+            <defs>
+                <filter id="filter0_f_3677_1013" x="468.8" y="20.8" width="125.4" height="125.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter1_f_3677_1013" x="532.8" y="0.8" width="125.4" height="125.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter2_f_3677_1013" x="511.8" y="49.8" width="125.4" height="125.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter3_f_3677_1013" x="618.8" y="10.8" width="105.4" height="105.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter4_f_3677_1013" x="590.8" y="60.8" width="105.4" height="105.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter5_f_3677_1013" x="0.8" y="133.8" width="95.4" height="95.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter6_f_3677_1013" x="34.8" y="137.8" width="106.4" height="106.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter7_f_3677_1013" x="25.8" y="176.8" width="81.4" height="81.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter8_f_3677_1013" x="85.8" y="174.8" width="81.4" height="81.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter9_f_3677_1013" x="33.8" y="89.8" width="105.4" height="105.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter10_f_3677_1013" x="73.8" y="121.8" width="105.4" height="105.4"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter11_f_3677_1013" x="311.8" y="235.24" width="69.9391" height="69.94"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter12_f_3677_1013" x="332.88" y="237.72" width="76.7594" height="76.7601"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter13_f_3677_1013" x="327.3" y="261.9" width="61.2594" height="61.2601"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+                <filter id="filter14_f_3677_1013" x="364.501" y="260.66" width="61.2594" height="61.2601"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="7.1" result="effect1_foregroundBlur_3677_1013" />
+                </filter>
+            </defs>
+        </svg>
+
+
+    </div>
+    <div class="content">
+        <div class="wrapper_80">
+            <p>Every week we go to the supermarket and in your basket you can find a diverse type of food and among
+                them, fruits, and maybe a <b>banana</b>. The banana is one of the most common fruits in Europe. “Bananas are
+                the second most popular fruit consumed after apples in Europe and a European citizen consumes on average
+                12 kg of bananas per year <b>(or two bananas per week)</b>.” </p>
+
+            <p>What we don’t usually know is where the bananas come from. <a href="https://www.fao.org/markets-and-trade/commodities/bananas/en/">Asia, Latin America and Africa are the main</a>
+                producers of this fruit. In the EU, Latino America is the main provider of this fruit, and Ecuador the
+                leader on it. This is a long trip through the ocean to arrive at our groceries and supermarkets. The
+                trip can take xxx hours. </p>
+
+            <p>In the European Union only 11% of the bananas are from the European Union mainly from Spain and France.
+                Meanwhile, around 75% is from Latin America. Bananas come mainly from Ecuador, 1,425,770 tonnes in 2024,
+                followed by Colombia (1,208,398 tonnes) and Costa Rica (1,056,623 tonnes).</p>
+
+        </div>
+  
+        <div id="treemap"></div>
+
+        <div class="wrapper_90">
+            <div class="title_chart">
+                <h2>Banana supply in the EU (27) in 2022</h2>
+                <p>Volumes (Tonnes) </p>
+                <div class="legend">
+                    <svg width="35" height="12" viewBox="0 0 35 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="35" height="12" rx="6" fill="#FFC654" />
+                    </svg>
+
+                    <p>Latin America</p>
+                    <svg width="35" height="12" viewBox="0 0 35 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="35" height="12" rx="6" fill="#444B55" />
+                    </svg>
+
+                    <p>ACP countries</p>
+                    <svg width="35" height="12" viewBox="0 0 35 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="35" height="12" rx="6" fill="#5498FF" />
+                    </svg>
+
+                    <p>European Union</p>
+                </div>
+            </div>
+            <!-- <img class="treemap" src="treemap.svg" width="100%" height="auto"> -->
+            <!-- <div id="treemap"></div> -->
+            <iframe class="chart_treemap" style="overflow: hidden; margin: 0 auto;display: flex;" frameborder=0
+                src="https://cristinapita.github.io/treemap_travel/"></iframe>
+            <!-- <div class="flourish-embed flourish-hierarchy" data-src="visualisation/18469546?1645657"><script src="https://public.flourish.studio/resources/embed.js"></script></div> -->
+
+            <div class="title_chart">
+                <p class="source">Source: MS Communications (EU) : volume of EU green bananas marketed on local
+                    markets and outside their region of production; Eurostat EU-27 data extracted on 11 December
+                    2023 Comext
+                </p>
+            </div>
+
+        </div>
+        <div class="wrapper_80">
+            <h3>The travel: from Ecuador to Netherlands</h3>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap
+                into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+                the
+                release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                publishing
+                software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+           
+        </div>
+    </div>
+    <div id="features">
+        <div class="map-container" id="map-container">
+            <div id="map"></div>
+        </div>
+        <div id="scrolly_content">
+            <section id="one" class="active">
+                <!-- <h3>221b Baker St.</h3> -->
+                <p>
+                    The first part of the trip is done by ship and then the truck takes over the goods.
+                </p>
+            </section>
+            <section id="two">
+                <!-- <h3>Aldgate Station</h3> -->
+                <p>
+                    In this journey, the ship departs from the port of Guayaquil in Ecuador, one of the biggest ports in the country.
+                </p>
+            </section>
+            <section id="three">
+                <!-- <h3>London Bridge</h3> -->
+                <p>
+                    The cargo goes through the Panama channel to the Atlantic Ocean. 
+                </p>
+            </section>
+            <section id="four">
+                <h3>Woolwich Arsenal</h3>
+                <p>
+                    While investigating at Woolwich Arsenal Sherlock learns that West
+                    did not have the three keys&mdash;door, office, and
+                    safe&mdash;necessary to steal the papers. The train station clerk
+                    mentions seeing an agitated West boarding the 8:15 train to London
+                    Bridge. Sherlock suspects West of following someone who had access
+                    to the Woolwich chief's keyring with all three keys.
+                </p>
+            </section>
+            <section id="five">
+                <!-- <h3>Gloucester Road</h3> -->
+                <p>
+                    Then the cargo ship arrives to the port of Rotterdam. Until this moment, the cargo has done xxx km
+                </p>
+            </section>
+            <section id="six">
+                <!-- <h3>13 Caulfield Gardens</h3> -->
+                <p>
+                    Then the trucks trucks load the merchandise
+                </p>
+            </section>
+            <section id="seven">
+                <!-- <h3>The Daily Telegraph</h3> -->
+                <p>
+                    Trucks can make…
+
+                </p>
+            </section>
+            <section id="eight">
+                <!-- <h3>Charing Cross Hotel</h3> -->
+                <p>
+                    Walter writes to Oberstein and convinces him to meet in the smoking
+                    room of the Charing Cross Hotel where he promises additional plans
+                    for the submarine in exchange for money. The plan works and Holmes
+                    and Watson catch both criminals.
+                </p>
+
+            </section>
+            <section id="nine">
+                <!-- <h3>Charing Cross Hotel</h3> -->
+                <p>
+                    This is the last point when the fruit is distributed to the supermarket and other shops. 
+
+                </p>
+
+            </section>
+        </div>
+
+    </div>
+    <div class="content">
+
+        <div class="wrapper_80">
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+        </div>
+        <div class="wrapper_100">
+
+            <div id="js-wrapper">
+                <div id="js-slideContainer">
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="img/img_scroll.svg" alt="Imagen parallax horizontal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="wrapper_80">
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+        </div>
+        <div class="wrapper_80_pollution">
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+        </div>
+        <div class="wrapper_80">
+            <h3>What we could have saved</h3>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+        </div>
+         <!-- <div class="wrapper_100">
+            <img class="infographics_2" src="img/infographic_emissions_step1.svg">
+        </div> -->
+       <!-- html del scroll de la imagen--> 
+
+       <main id="main2">
+        <section id="scrolly_img">
+          <div class="sticky-thing">
+            <div class="ai2html-container" id="ai2html-container">
+              <img id="img1" src="img/infographic_emissions_step1.svg" alt="Infographic emissions" class="">
+              <img id="img1m" src="img/infographic_emissions_step1_mob.svg" alt="Infographic emissions" class="">
+
+              <img id="img1" src="img/infographic_emissions_step1.svg" alt="Infographic emissions" class="hidden">
+              <img id="img1m" src="img/infographic_emissions_step1_mob.svg" alt="Infographic emissions" class="hidden">
+
+              <img id="img2" src="img/infographic_emissions_step2.svg" alt="Infographic emissions" class="hidden">
+              <img id="img2m" src="img/infographic_emissions_step2_mob.svg" alt="Infographic emissions" class="hidden">
+
+            </div>
+          </div>
+          <article id="article">
+            <div class="step" id="step-zero" data-scrollama-index="0">
+              <p>En los años 60 el paisaje de Madrid era muy diferente al actual: terrenos y parques se situaban a la orilla del río</p>
+            </div>
+            <div class="step" id="step-one" data-scrollama-index="1">
+              <p>Las vías del tren ocupaban lo que actualmente es un parque rodeado de área residencial</p>
+            </div>
+            <div class="step" id="step-two" data-scrollama-index="2">
+                <p>Las vías del tren ocupaban lo que actualmente es un parque rodeado de área residencial</p>
+              </div>
+
+          </article>
+        </section>
+    </main>
+        <div class="wrapper_80">
+
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into
+                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like
+                Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <img src="https://www.transportenvironment.org/assets/img/footer-gradient-desktop.png" loading="lazy">
+        </div>
+        <p>
+            © 2024 European Federation for Transport and Environment AISBL
+            </p>
+      </footer>
+</body>
+<script>
+
+
+
+
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY3Jpc3BkdjkiLCJhIjoiY2pvaDFiYmh3MDFsdjNxbzRhZDNtdnI5NCJ9.kqFlgrsHm5LBowBobc-DDg';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/crispdv9/clxejx484003401pf5hcb1ucb',
+        center: [-57.8607106, 31.2652556],
+        zoom: 1,
+        bearing: 0,
+        pitch: 0
+    });
+
+    const chapters = {
+        'one': {
+            bearing: 0,
+            center: [-57.8607106, 31.2652556],
+            zoom: 1,
+            pitch: 0
+        },
+        'two': {
+            duration: 3000,
+            center: [-79.9128442, -2.2787572],
+            bearing: 0,
+            zoom: 10,
+            pitch: 0
+        },
+        'three': {
+            bearing: 0,
+            center: [-78.5054119, 8.3425592],
+            zoom: 5
+        },
+        'four': {
+            bearing: 0,
+            center: [-57.8607106, 31.2652556],
+            zoom: 1
+        },
+        'five': {
+            bearing: 0,
+            center: [-5.6084326, 49.1179318],
+            zoom: 4,
+            pitch: 0,
+
+        },
+        'six': {
+            bearing: 10,
+            center: [3.5149515, 51.7685812],
+            zoom: 5
+        },
+        'seven': {
+            bearing: 0,
+            center: [4.4027677, 51.9175727],
+            zoom: 10,
+            pitch: 0
+        },
+        'eight': {
+            bearing: 0,
+            center: [4.4027677, 51.9175727],
+            zoom: 5,
+            pitch: 0
+        },
+        'nine': {
+            bearing: 0,
+            center: [4.4027677, 51.9175727],
+            zoom: 1,
+            pitch: 0
+        }
+    };
+
+    let activeChapterName = 'one';
+    function setActiveChapter(chapterName) {
+        if (chapterName === activeChapterName) return;
+
+        map.flyTo(chapters[chapterName]);
+
+        document.getElementById(chapterName).classList.add('active');
+        document.getElementById(activeChapterName).classList.remove('active');
+
+        activeChapterName = chapterName;
+    }
+
+    function isElementOnScreen(id) {
+        const element = document.getElementById(id);
+        const bounds = element.getBoundingClientRect();
+        return bounds.top < window.innerHeight && bounds.bottom > 300;
+    }
+
+    // On every scroll event, check which element is on screen
+    window.onscroll = () => {
+        for (const chapterName in chapters) {
+            if (isElementOnScreen(chapterName)) {
+                setActiveChapter(chapterName);
+                break;
+            }
+        }
+    };
+
+
+    // function isInViewport(element) {
+    //     const rect = element.getBoundingClientRect();
+    //     return (
+    //         rect.top >= 0 &&
+    //         rect.left >= 0 &&
+    //         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    //         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    //     );
+    // }
+    // function updateStickyMap() {
+    //     const mapContainer = document.getElementById('map-container');
+    //     const featuresSection = document.getElementById('features');
+
+    //     // Calcula la posición del final de la sección de "features"
+    //     const featuresSectionBottom = featuresSection.offsetTop + featuresSection.offsetHeight;
+
+    //     // Calcula la posición actual del scroll
+    //     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+    //     // Comprueba si el usuario ha llegado al final de la sección de "features"
+    //     if (scrollPosition >= featuresSectionBottom) {
+    //         // Si el usuario ha llegado al final de la sección de "features", quita la clase 'sticky' del contenedor del mapa
+    //         mapContainer.classList.remove('sticky');
+    //     } else {
+    //         // Si el usuario no ha llegado al final de la sección de "features", aplica la clase 'sticky' al contenedor del mapa
+    //         mapContainer.classList.add('sticky');
+    //     }
+    // }
+
+    // // Event listener para el evento de scroll
+    // window.addEventListener('scroll', updateStickyMap);
+
+    // // Llamada inicial para actualizar el estado del mapa pegajoso
+    // updateStickyMap();
+
+
+    //line moving
+
+    const geojson = {
+        'type': 'FeatureCollection',
+        'features': [
+            {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    "coordinates": [
+                        [-79.9528236330171, -2.27354376658552],
+                        [-80.4179123500049, -2.87898597289379],
+                        [-81.4535161264973, -2.73881427866563],
+                        [-81.698844231236, -1.60028690619596],
+                        [-81.4464175512284, -0.0372996184947709],
+                        [-81.0211465921052, 1.41922235497806],
+                        [-80.4187441299294, 2.41554346201315],
+                        [-79.8572941528185, 4.28010790989369],
+                        [-79.4807545850178, 7.09519016835418],
+                        [-79.5410066283978, 8.93254882678173],
+                        [-79.6988958228843, 9.11382536120587],
+                        [-79.8219753823985, 9.15597086177954],
+                        [-79.8964101201299, 9.22795866128188],
+                        [-79.7805338454551, 9.70774266863886],
+                        [-73.6758046156546, 14.3092714603103],
+                        [-60.3843364061983, 18.525312110364],
+                        [-5.62847521481444, 48.6318117617967],
+                        [1.98070468712916, 51.2819083461772],
+                        [5.60197194515885, 53.9826574568031],
+                        [8.64112862678613, 53.6894722745134]
+                    ],
+                    'type': 'LineString'
+                }
+            }
+        ]
+    };
+
+    map.on('load', () => {
+        map.addSource('line', {
+            type: 'geojson',
+            data: geojson
+        });
+
+        // add a line layer without line-dasharray defined to fill the gaps in the dashed line
+        map.addLayer({
+            type: 'line',
+            source: 'line',
+            id: 'line-background',
+            paint: {
+                'line-color': '#FF8754',
+                'line-width': 4,
+                'line-opacity': 0.4
+            }
+        });
+
+        // add a line layer with line-dasharray set to the first value in dashArraySequence
+        map.addLayer({
+            type: 'line',
+            source: 'line',
+            id: 'line-dashed',
+            paint: {
+                'line-color': '#FF8754',
+                'line-width': 3,
+                'line-dasharray': [0, 4, 3]
+            }
+        });
+
+        // technique based on https://jsfiddle.net/2mws8y3q/
+        // an array of valid line-dasharray values, specifying the lengths of the alternating dashes and gaps that form the dash pattern
+        const dashArraySequence = [
+            [0, 4, 3],
+            [0.5, 4, 2.5],
+            [1, 4, 2],
+            [1.5, 4, 1.5],
+            [2, 4, 1],
+            [2.5, 4, 0.5],
+            [3, 4, 0],
+            [0, 0.5, 3, 3.5],
+            [0, 1, 3, 3],
+            [0, 1.5, 3, 2.5],
+            [0, 2, 3, 2],
+            [0, 2.5, 3, 1.5],
+            [0, 3, 3, 1],
+            [0, 3.5, 3, 0.5]
+        ];
+
+        let step = 0;
+
+        function animateDashArray(timestamp) {
+            // Update line-dasharray using the next value in dashArraySequence. The
+            // divisor in the expression `timestamp / 50` controls the animation speed.
+            const newStep = parseInt(
+                (timestamp / 50) % dashArraySequence.length
+            );
+
+            if (newStep !== step) {
+                map.setPaintProperty(
+                    'line-dashed',
+                    'line-dasharray',
+                    dashArraySequence[step]
+                );
+                step = newStep;
+            }
+
+            // Request the next frame of the animation.
+            requestAnimationFrame(animateDashArray);
+        }
+
+        // start the animation
+        animateDashArray(0);
+
+    });
+
+    map.scrollZoom.disable();
+    map.dragPan.disable();
+
+
+
+</script>
+<script src="data/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3.v6.js"></script>
+
+</html>
